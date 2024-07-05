@@ -13,7 +13,7 @@ Util.getNav = async function (req, res, next) {
     list += "<li>"
     list +=
       '<a href="/inv/type/' +
-      row.classification_id +
+      row.classification_id + "/"+ row.classification_name + 
       '" title="See our inventory of ' +
       row.classification_name +
       ' vehicles">' +
@@ -24,8 +24,6 @@ Util.getNav = async function (req, res, next) {
   list += "</ul>"
   return list
 }
-
-module.exports = Util
 
 /* **************************************
 * Build the classification view HTML
@@ -60,3 +58,4 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+module.exports = Util
