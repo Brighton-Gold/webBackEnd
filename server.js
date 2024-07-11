@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser")
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
@@ -71,6 +72,7 @@ app.use(async (req, res, next) => {
   next({ status: 404, message: 'Sorry, we appear to have lost that page.' })
 })
 
+app.use(cookieParser())
 
 
 /* ***********************
