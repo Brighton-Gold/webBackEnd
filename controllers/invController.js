@@ -52,4 +52,26 @@ invCont.renderManagementView = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Render Add New Inventory View
+ * ************************** */
+invCont.renderAddInventoryView = async function (req, res, next) {
+  try {
+    let nav = await utilities.getNav();
+    let classificationList = await utilities.buildClassificationList();
+    let formData = req.body || {};
+    let form = utilities.buildAddInventoryForm(formData, classificationList);
+    
+    res.render("./inventory/add-inventory", {
+      title: "Add New Inventory",
+      nav,
+      form,
+      messages: req.flash("info"),
+      errors: req.flash("errors")
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = invCont

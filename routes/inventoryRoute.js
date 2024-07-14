@@ -10,5 +10,6 @@ router.get("/car/:inv_make/:inv_model/:inv_year", invController.buildCarById)
 
 router.get("/management", invController.renderManagementView)
 
+router.get("/add-inventory", invController.renderAddInventoryView)
 
 module.exports = router;

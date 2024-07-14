@@ -1,0 +1,26 @@
+<div class="inventory-container">
+    <% if (title) { %>
+      <h1><%= title %></h1>
+    <% } %>
+  
+    <% if (messages.length > 0) { %>
+      <div class="messages">
+        <% messages.forEach(function(message) { %>
+          <p><%= message %></p>
+        <% }) %>
+      </div>
+    <% } %>
+  
+    <% if (errors.length > 0) { %>
+      <div class="errors">
+        <% errors.forEach(function(error) { %>
+          <p><%= error %></p>
+        <% }) %>
+      </div>
+    <% } %>
+  
+    <%- form %>
+  </div>
+
+
+  
