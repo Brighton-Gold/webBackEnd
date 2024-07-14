@@ -281,3 +281,75 @@ button:hover {
 #registerForm div {
   margin-bottom: 15px; 
 } 
+
+/* Container for the car item */
+.car-container {
+  width: 300px; /* Adjust as necessary */
+  margin: 20px auto; /* Center align and add spacing */
+  border: 1px solid #ccc; /* Border for visual separation */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Prevent overflow issues */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center align text */
+}
+
+/* Styling for the car photo */
+.car-photo {
+  width: 200%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Styling for the car title */
+.car-title {
+  font-size: 1.5em; /* Larger font size */
+  margin: 10px 0; /* Vertical margin */
+  color: #333; /* Darker text color */
+}
+
+/* Styling for the car details */
+.car-details {
+  font-size: 1em; /* Standard font size */
+  margin: 0 10px 10px; /* Margin around text */
+  color: #666; /* Slightly lighter text color */
+  text-align: left; /* Left align text */
+}
+
+/* Car Detail View */
+.car-detail {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.car-detail h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+.car-detail img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+}
+
+.car-detail p {
+  background-color: #f8f8f8;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .car-detail {
+    padding: 15px;
+  }
+
+  .car-detail h1 {
+    font-size: 1.5em;
+  }
+}

@@ -14,6 +14,9 @@ router.get("/login", accountController.buildLogin);
 // Route to build the registration view
 router.get("/register", accountController.buildRegister);
 
+// Route to check if logged in
+//router.get("/", utilities.checkLogin, accountController.);
+
 // Route to handle registration
 router.post(
   "/register",
