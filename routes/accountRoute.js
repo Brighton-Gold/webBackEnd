@@ -33,6 +33,12 @@ router.post(
   accountController.accountLogin
 );
 
+
+// Route to handle logout
+router.get('/logout', accountController.accountLogout);
+
+
+
 // Catch all for unexpected errors
 router.use((req, res, next) => {
   next({ status: 404, message: 'Unexpected Error' });

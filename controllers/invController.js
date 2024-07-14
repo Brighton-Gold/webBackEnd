@@ -43,10 +43,12 @@ invCont.buildCarById = async function (req, res, next) {
  * ************************** */
 invCont.renderManagementView = async function (req, res, next) {
   let nav = await utilities.getNav()
+  let list = await utilities.buildManagementGrid()
   res.render("./inventory/management", {
-    title: "Inventory Management",
-    nav,
-    messages: req.flash("info"),
+      title: "Manage Inventory",
+      nav,
+      list,
+      errors: null
   })
 }
 

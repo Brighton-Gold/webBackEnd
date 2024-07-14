@@ -60,6 +60,9 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the individual view HTML
+* ************************************ */
 Util.buildCarDetail = function(car) {
   let detail = '<div class="car-detail">'
   detail += '<img src="' + car.inv_image + '" alt="Image of ' + car.inv_make + ' ' + car.inv_model + '">'
@@ -70,6 +73,17 @@ Util.buildCarDetail = function(car) {
   detail += '<p>Color: ' + car.inv_color + '</p>'
   detail += '</div>'
   return detail
+}
+
+/* **************************************
+* Build the management view HTML
+* ************************************ */
+Util.buildManagementGrid = async function(req, res, next){
+  let list = "<div class = 'management'><ul>"
+  list += "<p><a href=/inv/add-classification>Add New Classification</a></p>"
+  list += "<p><a href=/inv/add-inventory>Add New Inventory</a></p>"
+  list += "</ul></div>"
+  return list
 }
 
 /* ****************************************
@@ -91,6 +105,8 @@ Util.checkJWTToken = (req, res, next) => {
      next()
     })
   } else {
+    res.locals.loggedin = false;
+
    next()
   }
  }
