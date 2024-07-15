@@ -157,6 +157,23 @@ Util.checkJWTToken = (req, res, next) => {
 };
 
 /* ****************************************
+ * Middleware to check classification name
+ **************************************** */
+Util.validateClassificationName(req, res, next) {
+  const { classificationName } = req.body;
+  const regex = /^[a-zA-Z0-9]+$/;
+
+  if (!regex.test(classificationName)) {
+      req.errorMessage = "Classification name cannot contain spaces or special characters.";
+      return res.redirect('/inventory/add-classification');
+  }
+
+  next();
+}
+
+
+
+/* ****************************************
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {

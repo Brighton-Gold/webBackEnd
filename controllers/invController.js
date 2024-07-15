@@ -74,4 +74,19 @@ invCont.renderAddInventoryView = async function (req, res, next) {
   }
 };
 
+/* ***************************
+ *  Render Add New Classification View
+ * ************************** */
+invCont.renderNewClassificationView = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  let form = utilities.buildAddClassificationForm();
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    form,
+    messages: req.flash("info"),
+    errors: req.flash("errors")
+  });
+}
+
 module.exports = invCont
