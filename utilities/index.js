@@ -157,21 +157,22 @@ Util.checkJWTToken = (req, res, next) => {
 };
 
 /* ****************************************
- * Middleware to check classification name
+ * Middleware to check classification name validity
  **************************************** */
-Util.validateClassificationName(req, res, next) {
-  const { classificationName } = req.body;
-  const regex = /^[a-zA-Z0-9]+$/;
-
-  if (!regex.test(classificationName)) {
-      req.errorMessage = "Classification name cannot contain spaces or special characters.";
-      return res.redirect('/inventory/add-classification');
+Util.validateClassification = async (req, res, next) => {
+  let classification_name = req.body.classification_name;
+  let data = await invModel.getClassifications();
+  let classificationList = data.rows;
+  let classificationNames = classificationList.map((classification) => {
+    return classification.classification_name;
+  });
+  if (classificationNames.includes(classification_name)) {
+    req.flash("notice", "Classification already exists.");
+    return res.redirect("/inv/add-classification");
+  } else {
+    next();
   }
-
-  next();
-}
-
-
+};
 
 /* ****************************************
  *  Check Login
@@ -272,5 +273,23 @@ Util.buildAddInventoryForm = function (formData = {}, classificationList) {
 
   return form;
 };
+
+/* ****************************************
+ *  Add New Classification Form
+ * ************************************ */
+Util.buildAddClassificationForm = function (formData = {}) {  
+  let form = '<div class="classification-container">';
+  form +=
+    '<form action="/inv/add-classification" method="POST" id="addClassificationForm">';
+  form += '<label for="classification_name">Classification Name</label>';
+  form += `<input type="text" id="classification_name" name="classification_name" value="${
+    formData.classification_name || ""
+  }" required>`;
+  form += '<button type="submit">Add Classification</button>';
+  form += "</form>";
+  form += "</div>";
+  return form;
+}
+
 
 module.exports = Util;

@@ -8,6 +8,36 @@ async function getClassifications(){
 }
 
 /* ***************************
+ *  Add new classification data
+ * ************************** */
+async function addClassification(classification_name) {
+  try {
+    const data = await pool.query(
+      `INSERT INTO public.classification (classification_name) VALUES ($1)`,
+      [classification_name]
+    )
+    return data
+  } catch (error) {
+    console.error("addClassification error " + error)
+  }
+
+}
+
+ /* **********************
+ *   Check for existing classification name
+ * ********************* */
+ async function checkExistingClassification(classification_name){
+  try {
+    const sql = "SELECT * FROM public.classification WHERE classification_name = $1"
+    const classification = await pool.query(sql, [classification_name])
+    return classification.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+
+/* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
@@ -41,4 +71,4 @@ async function getCarById(inv_make, inv_model, inv_year) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getCarById};
+module.exports = {getClassifications, getInventoryByClassificationId, getCarById, addClassification, checkExistingClassification};
