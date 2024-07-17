@@ -26,10 +26,12 @@ validate.classificationRules = () => {
 validate.checkClassData = async (req, res, next) => {
     let errors = []
     errors = validationResult(req)
+    let form = utilities.buildAddClassificationForm(req.body)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
-        res.render("/add-classification", {
+        res.render("inventory/add-classification", {
             errors,
+            form,
             title: "Sucessfully add new Classification",
             nav,
         })
