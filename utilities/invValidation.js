@@ -6,7 +6,7 @@ const validate = {}
 
 validate.classificationRules = () => {
     return [
-        body('classification')
+        body('classification_name')
             .trim()
             .isLength({ min: 3 }).withMessage('Classification must be at least 3 characters long')
             .matches(/^[a-zA-Z\s]*$/).withMessage('Classification can only be made with letters')
@@ -24,15 +24,18 @@ validate.classificationRules = () => {
 * Check data and return errors or continue to registration
 * ***************************** */
 validate.checkClassData = async (req, res, next) => {
+    const { classification_name } = req.body
     let errors = []
     errors = validationResult(req)
-    let form = utilities.buildAddClassificationForm(req.body)
+    let form = utilities.buildAddClassificationForm()
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
         res.render("inventory/add-classification", {
             errors,
             form,
-            title: "Sucessfully add new Classification",
+            //add if statement to checif added successfully
+            messages: "Successfully added new Classification",
+            title: "Add New Classification",
             nav,
         })
         return
