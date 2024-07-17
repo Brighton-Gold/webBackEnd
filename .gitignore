@@ -18,3 +18,4 @@ node_modules
 readme.md
 .env
 pnpm-lock.yaml
+.vscode/launch.json

@@ -1,10 +1,10 @@
 const classModel = require('../models/inventory-model');
-const utilities = require('../utilities/index');
+const utilities = require('./index');
 const { body, validationResult } = require("express-validator")
 const view = require('../controllers/invController');
 const validate = {}
 
-validate.newClassification = () => {
+validate.classificationRules = () => {
     return [
         body('classification')
             .trim()
@@ -24,18 +24,14 @@ validate.newClassification = () => {
 * Check data and return errors or continue to registration
 * ***************************** */
 validate.checkClassData = async (req, res, next) => {
-    const { classification } = req.body
     let errors = []
-    let form = view.renderNewClassificationView
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
-        res.render("inventory/add-classification", {
+        res.render("/add-classification", {
             errors,
             title: "Sucessfully add new Classification",
             nav,
-            messages: "Sucessfully add new Classification",
-            form
         })
         return
     }

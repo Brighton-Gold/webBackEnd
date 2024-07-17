@@ -2,7 +2,7 @@ const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
 const utilities = require('../utilities');
-const classValidate = require('../utilities/new-class-validation');
+const classValidate = require('../utilities/invValidation.js');
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId/:classificationName", invController.buildByClassificationId);
@@ -17,7 +17,7 @@ router.get("/add-classification", invController.renderNewClassificationView)
 
 router.post(
     "/add-classification",
-    classValidate.newClassification(),
+    classValidate.classificationRules(),
     classValidate.checkClassData,
     invController.renderNewClassificationView
 )
