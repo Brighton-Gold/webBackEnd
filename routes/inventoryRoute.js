@@ -22,4 +22,11 @@ router.post(
     invController.renderNewClassificationView
 )
 
+router.post(
+    "/add-inventory",
+    classValidate.inventoryRules(),
+    classValidate.checkInvData,
+    invController.renderAddInventoryView
+)
+
 module.exports = router;

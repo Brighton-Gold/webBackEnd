@@ -213,7 +213,6 @@ Util.buildClassificationList = async function (classification_id = null) {
  * ************************************ */
 Util.buildAddInventoryForm = function (formData = {}, classificationList) {
   let form = '<div class="inventory-container">';
-  form += "<h1>Add New Inventory</h1>";
 
   form +=
     '<form action="/inv/add-inventory" method="POST" id="addInventoryForm">';
@@ -289,7 +288,7 @@ Util.buildAddClassificationForm = function (formData = {}) {
   form += "</form>";
   form += "</div>";
   return form;
-}
+} 
 
 
 module.exports = Util;
