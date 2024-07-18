@@ -12,6 +12,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
+  
   const className = data[0].classification_name
   res.render("./inventory/classification", {
     title: className + " vehicles",
@@ -80,7 +81,6 @@ invCont.renderAddInventoryView = async function (req, res, next) {
 invCont.renderNewClassificationView = async function (req, res, next) {
   let nav = await utilities.getNav();
   let form = utilities.buildAddClassificationForm();
-  await invModel.addClassification()
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,
@@ -90,5 +90,24 @@ invCont.renderNewClassificationView = async function (req, res, next) {
   });
 }
 
+/* ***************************
+ *  Add New Classification
+ * ************************** */
+invCont.addClassification = async function (req, res, next) {
+  try {
+    const { classification_name } = req.body;
+    console.log(req.body)
+    console.log(classification_name)
+    const data = await invModel.addClassification(classification_name);
+    if (data) {
+      req.flash("info", "Classification added successfully");
+    } else {
+      req.flash("errors", "Failed to add classification");
+    }
+   res.redirect("./inventory/add-classification");
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = invCont

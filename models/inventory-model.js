@@ -13,7 +13,7 @@ async function getClassifications(){
 async function addClassification(classification_name) {
   try {
     const data = await pool.query(
-      `INSERT INTO public.classification (classification_name) VALUES ($1)`,
+      `INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING classification_id`,
       [classification_name]
     )
     console.log(data)
@@ -21,7 +21,6 @@ async function addClassification(classification_name) {
   } catch (error) {
     console.error("addClassification error " + error)
   }
-
 }
 
  /* **********************
