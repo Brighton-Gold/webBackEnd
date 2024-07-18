@@ -207,7 +207,6 @@ Util.buildClassificationList = async function (classification_id = null) {
   classificationList += "</select>";
   return classificationList;
 };
-
 /* ****************************************
  *  Add inventory Form
  * ************************************ */
@@ -220,49 +219,49 @@ Util.buildAddInventoryForm = function (formData = {}, classificationList) {
   form += '<label for="classification_id">Classification</label>';
   form += classificationList;
 
-  form += '<label for="make">Make</label>';
-  form += `<input type="text" id="make" name="make" value="${
-    formData.make || ""
+  form += '<label for="inv_make">Make</label>';
+  form += `<input type="text" id="inv_make" name="inv_make" value="${
+    formData.inv_make || ""
   }" required>`;
 
-  form += '<label for="model">Model</label>';
-  form += `<input type="text" id="model" name="model" value="${
-    formData.model || ""
+  form += '<label for="inv_model">Model</label>';
+  form += `<input type="text" id="inv_model" name="inv_model" value="${
+    formData.inv_model || ""
   }" required>`;
 
-  form += '<label for="description">Description</label>';
-  form += `<textarea id="description" name="description" required>${
-    formData.description || ""
+  form += '<label for="inv_description">Description</label>';
+  form += `<textarea id="inv_description" name="inv_description" required>${
+    formData.inv_description || ""
   }</textarea>`;
 
-  form += '<label for="image_path">Image Path</label>';
-  form += `<input type="text" id="image_path" name="image_path" value="${
-    formData.image_path || "/images/no-image.png"
+  form += '<label for="inv_image">Image Path</label>';
+  form += `<input type="text" id="inv_image" name="inv_image" value="${
+    formData.inv_image || "/images/no-image.png"
   }" required>`;
 
-  form += '<label for="thumbnail_path">Thumbnail Path</label>';
-  form += `<input type="text" id="thumbnail_path" name="thumbnail_path" value="${
-    formData.thumbnail_path || "/images/no-image-thumbnail.png"
+  form += '<label for="inv_thumbnail">Thumbnail Path</label>';
+  form += `<input type="text" id="inv_thumbnail" name="inv_thumbnail" value="${
+    formData.inv_thumbnail || "/images/no-image-thumbnail.png"
   }" required>`;
 
-  form += '<label for="price">Price</label>';
-  form += `<input type="number" id="price" name="price" value="${
-    formData.price || ""
+  form += '<label for="inv_price">Price</label>';
+  form += `<input type="number" id="inv_price" name="inv_price" value="${
+    formData.inv_price || ""
   }" required>`;
 
-  form += '<label for="year">Year</label>';
-  form += `<input type="number" id="year" name="year" value="${
-    formData.year || ""
+  form += '<label for="inv_year">Year</label>';
+  form += `<input type="number" id="inv_year" name="inv_year" value="${
+    formData.inv_year || ""
   }" required>`;
 
-  form += '<label for="mileage">Mileage</label>';
-  form += `<input type="number" id="mileage" name="mileage" value="${
-    formData.mileage || ""
+  form += '<label for="inv_miles">Mileage</label>';
+  form += `<input type="number" id="inv_miles" name="inv_miles" value="${
+    formData.inv_miles || ""
   }" required>`;
 
-  form += '<label for="color">Color</label>';
-  form += `<input type="text" id="color" name="color" value="${
-    formData.color || ""
+  form += '<label for="inv_color">Color</label>';
+  form += `<input type="text" id="inv_color" name="inv_color" value="${
+    formData.inv_color || ""
   }" required>`;
 
   form += '<button type="submit">Add Vehicle</button>';

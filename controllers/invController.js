@@ -123,4 +123,22 @@ invCont.addClassification = async function (req, res, next) {
   }
 };
 
+/* ***************************
+ *  Add New Inventory
+ * ************************** */
+invCont.addInventory = async function (req, res, next) {
+  try {
+    const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
+    const data = await invModel.addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
+    if (data) {
+      req.flash("info", "inventory added successfully");
+    } else {
+      req.flash("errors", "Failed to add inventory");
+    }
+    res.redirect("./add-inventory");
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = invCont;

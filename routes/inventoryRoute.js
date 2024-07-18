@@ -27,6 +27,7 @@ router.post(
     "/add-inventory",
     classValidate.inventoryRules(),
     classValidate.checkInvData,
+    invController.addInventory,
     invController.renderAddInventoryView
 )
 

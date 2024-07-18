@@ -23,6 +23,33 @@ async function addClassification(classification_name) {
   }
 }
 
+/* ***************************
+ *  Add new inventory data
+ * ************************** */
+async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) {
+  try {
+    const data = await pool.query(
+      `INSERT INTO public.inventory (
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING inv_id`,
+      [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id]
+    )
+    console.log(data)
+    return data
+  } catch (error) {
+    console.error("addInventory error " + error)
+  }
+}
+
  /* **********************
  *   Check for existing classification name
  * ********************* */
@@ -72,4 +99,4 @@ async function getCarById(inv_make, inv_model, inv_year) {
 }
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getCarById, addClassification, checkExistingClassification};
+module.exports = {getClassifications, getInventoryByClassificationId, getCarById, addClassification, checkExistingClassification, addInventory};
