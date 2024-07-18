@@ -117,7 +117,7 @@ invCont.addClassification = async function (req, res, next) {
     } else {
       req.flash("errors", "Failed to add classification");
     }
-    res.redirect("./inventory/add-classification");
+    res.redirect("./add-classification");
   } catch (error) {
     next(error);
   }
