@@ -207,6 +207,7 @@ Util.buildClassificationList = async function (classification_id = null) {
   classificationList += "</select>";
   return classificationList;
 };
+
 /* ****************************************
  *  Add inventory Form
  * ************************************ */
