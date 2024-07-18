@@ -80,6 +80,7 @@ invCont.renderAddInventoryView = async function (req, res, next) {
 invCont.renderNewClassificationView = async function (req, res, next) {
   let nav = await utilities.getNav();
   let form = utilities.buildAddClassificationForm();
+  await invModel.addClassification()
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,
@@ -88,5 +89,6 @@ invCont.renderNewClassificationView = async function (req, res, next) {
     errors: req.flash("errors")
   });
 }
+
 
 module.exports = invCont

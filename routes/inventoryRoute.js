@@ -19,7 +19,8 @@ router.post(
     "/add-classification",
     classValidate.classificationRules(),
     classValidate.checkClassData,
-    invController.renderNewClassificationView
+    invController.renderNewClassificationView,
+    invController.addClassification
 )
 
 router.post(

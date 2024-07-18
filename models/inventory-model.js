@@ -16,6 +16,7 @@ async function addClassification(classification_name) {
       `INSERT INTO public.classification (classification_name) VALUES ($1)`,
       [classification_name]
     )
+    console.log(data)
     return data
   } catch (error) {
     console.error("addClassification error " + error)
@@ -70,5 +71,6 @@ async function getCarById(inv_make, inv_model, inv_year) {
     console.error("getCarById error " + error)
   }
 }
+
 
 module.exports = {getClassifications, getInventoryByClassificationId, getCarById, addClassification, checkExistingClassification};
