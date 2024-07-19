@@ -1,11 +1,8 @@
 const express = require("express");
-
 const router = new express.Router();
-
 const accountController = require("../controllers/accountsController");
-
 const utilities = require("../utilities");
-
+const home = require("../controllers/baseController");
 const regValidate = require('../utilities/account-validation');
 
 // Route to build the login view
@@ -14,8 +11,6 @@ router.get("/login", accountController.buildLogin);
 // Route to build the registration view
 router.get("/register", accountController.buildRegister);
 
-// Route to check if logged in
-//router.get("/", utilities.checkLogin, accountController.);
 
 // Route to handle registration
 router.post(
@@ -30,9 +25,11 @@ router.post(
   "/login",
   regValidate.loginRules(), // Use appropriate validation for login
   regValidate.checkLoginData,
-  accountController.accountLogin
+  home.buildHome
 );
 
+// Route to check if logged in
+//router.get("/", utilities.checkLogin, home.buildHome);
 
 // Route to handle logout
 router.get('/logout', accountController.accountLogout);
