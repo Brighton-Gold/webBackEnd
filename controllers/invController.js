@@ -54,7 +54,7 @@ invCont.renderManagementView = async function (req, res, next) {
     let nav = await utilities.getNav();
     let list = await utilities.buildManagementGrid();
     const classificationSelect = await utilities.buildClassificationList()
-    res.render("./inventory/management", {
+    res.render("./inventory/inventoryManagement", {
       title: "Manage Inventory",
       nav,
       list,

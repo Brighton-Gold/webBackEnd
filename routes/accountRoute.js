@@ -23,13 +23,13 @@ router.post(
 // Process the login attempt
 router.post(
   "/login",
-  regValidate.loginRules(), // Use appropriate validation for login
+  regValidate.loginRules(), 
   regValidate.checkLoginData,
   home.buildHome
 );
 
 // Route to check if logged in
-//router.get("/", utilities.checkLogin, home.buildHome);
+router.get("/", utilities.checkLogin, accountController.buildAccountManagement);
 
 // Route to handle logout
 router.get('/logout', accountController.accountLogout);
