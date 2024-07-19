@@ -15,7 +15,7 @@ router.get("/login", accountController.buildLogin);
 router.get("/register", accountController.buildRegister);
 
 // Route to check if logged in
-//router.get("/", utilities.checkLogin, accountController.);
+router.get("/", utilities.checkLogin, accountController.buildAccountManagement);
 
 // Route to handle registration
 router.post(
@@ -28,7 +28,7 @@ router.post(
 // Process the login attempt
 router.post(
   "/login",
-  regValidate.loginRules(), // Use appropriate validation for login
+  regValidate.loginRules(), 
   regValidate.checkLoginData,
   accountController.accountLogin
 );
