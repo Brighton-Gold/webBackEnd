@@ -26,7 +26,23 @@ invCont.buildByClassificationId = async function (req, res, next) {
   }
 };
 
-
+/* ***************************
+  *  Delete Inventory
+  * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  try {
+    const inv_id = req.params.inv_id;
+    const data = await invModel.deleteInventory(inv_id);
+    if (data) {
+      req.flash("info", "Inventory deleted successfully");
+    } else {
+      req.flash("errors", "Failed to delete inventory");
+    }
+    res.redirect("/inv/management");
+  } catch (error) {
+    next(error);
+  }
+};
 
 /* ***************************
  *  Build individual car details view
@@ -136,11 +152,11 @@ invCont.addInventory = async function (req, res, next) {
     const {
       inv_make,
       inv_model,
-      inv_year,
       inv_description,
       inv_image,
       inv_thumbnail,
       inv_price,
+      inv_year,
       inv_miles,
       inv_color,
       classification_id,
@@ -148,21 +164,21 @@ invCont.addInventory = async function (req, res, next) {
     const data = await invModel.addInventory(
       inv_make,
       inv_model,
-      inv_year,
       inv_description,
       inv_image,
       inv_thumbnail,
       inv_price,
+      inv_year,
       inv_miles,
       inv_color,
       classification_id
     );
     if (data) {
-      req.flash("info", "inventory added successfully");
+      req.flash("info", "Inventory added successfully");
     } else {
       req.flash("errors", "Failed to add inventory");
     }
-    res.redirect("./add-inventory");
+    res.redirect("/inv/add-inventory");
   } catch (error) {
     next(error);
   }

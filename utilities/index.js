@@ -28,6 +28,7 @@ Util.getNav = async function (req, res, next) {
   list += "</ul>";
   return list;
 };
+
 /* **************************************
  * Build the classification view HTML
  * ************************************ */
@@ -174,40 +175,31 @@ Util.buildAddInventoryForm = function (formData = {}, classificationList) {
   form += classificationList;
 
   form += '<label for="inv_make">Make</label>';
-  form += `<input type="text" id="inv_make" name="inv_make" value="${formData.inv_make || ""
-    }" required>`;
+  form += `<input type="text" id="inv_make" name="inv_make" value="${formData.inv_make || ''}" required>`;
 
   form += '<label for="inv_model">Model</label>';
-  form += `<input type="text" id="inv_model" name="inv_model" value="${formData.inv_model || ""
-    }" required>`;
+  form += `<input type="text" id="inv_model" name="inv_model" value="${formData.inv_model || ''}" required>`;
 
   form += '<label for="inv_description">Description</label>';
-  form += `<textarea id="inv_description" name="inv_description" required>${formData.inv_description || ""
-    }</textarea>`;
+  form += `<textarea id="inv_description" name="inv_description" required>${formData.inv_description || ''}</textarea>`;
 
   form += '<label for="inv_image">Image Path</label>';
-  form += `<input type="text" id="inv_image" name="inv_image" value="${formData.inv_image || "/images/no-image.png"
-    }" required>`;
+  form += `<input type="text" id="inv_image" name="inv_image" value="${formData.inv_image || '/images/no-image.png'}" required>`;
 
   form += '<label for="inv_thumbnail">Thumbnail Path</label>';
-  form += `<input type="text" id="inv_thumbnail" name="inv_thumbnail" value="${formData.inv_thumbnail || "/images/no-image-thumbnail.png"
-    }" required>`;
+  form += `<input type="text" id="inv_thumbnail" name="inv_thumbnail" value="${formData.inv_thumbnail || '/images/no-image-thumbnail.png'}" required>`;
 
   form += '<label for="inv_price">Price</label>';
-  form += `<input type="number" id="inv_price" name="inv_price" value="${formData.inv_price || ""
-    }" required>`;
+  form += `<input type="number" id="inv_price" name="inv_price" value="${formData.inv_price || ''}" required>`;
 
   form += '<label for="inv_year">Year</label>';
-  form += `<input type="number" id="inv_year" name="inv_year" value="${formData.inv_year || ""
-    }" required>`;
+  form += `<input type="number" id="inv_year" name="inv_year" value="${formData.inv_year || ''}" required>`;
 
   form += '<label for="inv_miles">Mileage</label>';
-  form += `<input type="number" id="inv_miles" name="inv_miles" value="${formData.inv_miles || ""
-    }" required>`;
+  form += `<input type="number" id="inv_miles" name="inv_miles" value="${formData.inv_miles || ''}" required>`;
 
   form += '<label for="inv_color">Color</label>';
-  form += `<input type="text" id="inv_color" name="inv_color" value="${formData.inv_color || ""
-    }" required>`;
+  form += `<input type="text" id="inv_color" name="inv_color" value="${formData.inv_color || ''}" required>`;
 
   form += '<button type="submit">Add Vehicle</button>';
   form += "</form>";
@@ -216,6 +208,7 @@ Util.buildAddInventoryForm = function (formData = {}, classificationList) {
 
   return form;
 };
+
 
 /* ****************************************
  *  Add New Classification Form

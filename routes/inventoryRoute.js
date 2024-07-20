@@ -17,7 +17,7 @@ router.get("/add-classification", invController.renderNewClassificationView)
 router.get("/getInventory/:classification_id", invController.getInventoryJSON)
 
 router.get("/edit-inventory/:inv_id", invController.editInventoryView)
-
+router.get("/delete-inventory/:inv_id", invController.deleteInventory)
 
 router.post(
     "/add-classification",
@@ -29,18 +29,25 @@ router.post(
 
 router.post(
     "/add-inventory",
-    classValidate.updateInventoryRules(),
+    classValidate.inventoryRules(),
     classValidate.checkInvData,
     invController.addInventory,
     invController.renderAddInventoryView
 )
 
-router.post("/edit-inventory",
+router.post(
+    "/edit-inventory",
     classValidate.inventoryRules(),
     classValidate.checkUpdateInvData, 
     invController.updateInventory,
     invController.renderManagementView
 
+)
+
+router.post(
+    "/delete-inventory", 
+    invController.deleteInventory,
+    invController.renderManagementView
 )
 
 module.exports = router;

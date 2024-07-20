@@ -46,7 +46,7 @@ function buildInventoryList(data) {
       <tr>
         <td>${element.inv_make} ${element.inv_model}</td>
         <td><a href='/inv/edit-inventory/${element.inv_id}' title='Click to update'>Modify</a></td>
-        <td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td>
+        <td><a href='/inv/delete-inventory/${element.inv_id}' title='Click to delete'>Delete</a></td>
       </tr>`;
   });
 
