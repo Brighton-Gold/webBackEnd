@@ -14,7 +14,7 @@ router.get("/management", invController.renderManagementView)
 
 router.get("/add-inventory", invController.renderAddInventoryView)
 router.get("/add-classification", invController.renderNewClassificationView)
-router.get("/getInventory/:classification_id", invController.getInventoryJSON)
+router.get("/getInventory/:classification_id", invController.getInventoryJSON);
 
 router.get("/edit-inventory/:inv_id", invController.editInventoryView)
 router.get("/delete-inventory/:inv_id", invController.deleteInventory)

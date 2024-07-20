@@ -96,11 +96,13 @@ async function getInventoryByClassificationId(classification_id) {
       `SELECT * FROM public.inventory WHERE classification_id = $1`,
       [classification_id]
     );
-    return data.rows;
+    return data.rows; // This should be an array
   } catch (error) {
     console.error("getInventoryByClassificationId error", error);
+    return []; // Return an empty array in case of an error
   }
 }
+
 
 /* ***************************
  *  Get car details by ID

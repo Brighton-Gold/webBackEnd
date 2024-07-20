@@ -250,16 +250,25 @@ invCont.updateInventory = async function (req, res, next) {
  *  Return Inventory by Classification As JSON
  * ************************** */
 invCont.getInventoryJSON = async (req, res, next) => {
-  const classification_id = parseInt(req.params.classification_id);
-  const invData = await invModel.getInventoryByClassificationId(
-    classification_id
-  );
-  if (invData[0].inv_id) {
-    return res.json(invData);
-  } else {
-    next(new Error("No data returned"));
+  try {
+    const classification_id = parseInt(req.params.classification_id);
+    const invData = await invModel.getInventoryByClassificationId(classification_id);
+
+    if (Array.isArray(invData) && invData.length > 0) {
+      // Check if the first item has the inv_id property
+      if (invData[0].inv_id !== undefined) {
+        return res.json(invData);
+      } else {
+        next(new Error("No valid data returned"));
+      }
+    } else {
+      next(new Error("No data found for the given classification ID"));
+    }
+  } catch (error) {
+    next(error);
   }
 };
+
 
 /* ***************************
  *  Render Edit Inventory View
