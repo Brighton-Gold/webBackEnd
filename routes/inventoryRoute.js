@@ -1,5 +1,5 @@
 const express = require("express")
-const router = new express.Router() 
+const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require('../utilities');
 const classValidate = require('../utilities/invValidation.js');
@@ -8,14 +8,16 @@ const classValidate = require('../utilities/invValidation.js');
 router.get("/type/:classificationId/:classificationName", invController.buildByClassificationId);
 
 // Route to build individual car details view
-router.get("/car/:inv_make/:inv_model/:inv_year", invController.buildCarById)
+router.get("/car/:inv_id", invController.buildCarById);
 
 router.get("/management", invController.renderManagementView)
 
 router.get("/add-inventory", invController.renderAddInventoryView)
 router.get("/add-classification", invController.renderNewClassificationView)
 router.get("/getInventory/:classification_id", invController.getInventoryJSON)
-router.get("/edit/:inv_id", invController.renderEditInventoryView)
+
+router.get("/edit-inventory/:inv_id", invController.editInventoryView)
+
 
 router.post(
     "/add-classification",
@@ -31,6 +33,14 @@ router.post(
     classValidate.checkInvData,
     invController.addInventory,
     invController.renderAddInventoryView
+)
+
+router.post("/edit-inventory",
+    classValidate.inventoryRules(),
+    classValidate.checkUpdateInvData, 
+    invController.updateInventory,
+    invController.renderManagementView
+
 )
 
 module.exports = router;

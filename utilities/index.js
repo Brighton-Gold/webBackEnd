@@ -28,29 +28,24 @@ Util.getNav = async function (req, res, next) {
   list += "</ul>";
   return list;
 };
-
 /* **************************************
  * Build the classification view HTML
  * ************************************ */
 Util.buildClassificationGrid = async function (data) {
-  let grid;
+  let grid = "";  // Initialize the grid variable
+
   if (data.length > 0) {
     grid = '<ul id="inv-display">';
     data.forEach((vehicle) => {
-      grid += '<li style = "list-style-type: none;">';
+      grid += '<li style="list-style-type: none;">';
       grid +=
-        '<a href="../../car/' +
-        vehicle.inv_make +
-        "/" +
-        vehicle.inv_model +
-        "/" +
-        vehicle.inv_year +
-        '" title="View ' +
+        '<a href="/car/' +
+        vehicle.inv_id +
         '" title="View ' +
         vehicle.inv_make +
         " " +
         vehicle.inv_model +
-        'details"><img src="' +
+        ' details"><img src="' +
         vehicle.inv_thumbnail +
         '" alt="Image of ' +
         vehicle.inv_make +
@@ -61,12 +56,8 @@ Util.buildClassificationGrid = async function (data) {
       grid += "<hr />";
       grid += "<h2>";
       grid +=
-        '<a href="../../car/' +
-        vehicle.inv_make +
-        "/" +
-        vehicle.inv_model +
-        "/" +
-        vehicle.inv_year +
+        '<a href="/car/' +
+        vehicle.inv_id +
         '" title="View ' +
         vehicle.inv_make +
         " " +
@@ -86,7 +77,7 @@ Util.buildClassificationGrid = async function (data) {
     });
     grid += "</ul>";
   } else {
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';  // Initialize the grid variable when data is empty
   }
   return grid;
 };

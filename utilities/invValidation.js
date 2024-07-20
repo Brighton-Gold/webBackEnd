@@ -103,5 +103,29 @@ validate.checkInvData = async (req, res, next) => {
     next();
 };
 
+/* ******************************
+* Check updated inventory data and return errors or adds
+* ***************************** */
+validate.checkUpdateInvData = async (req, res, next) => {
+    let errors = validationResult(req);
+    let formData = req.body;
+    let inv_id = req.body.inv_id;
+    let classificationList = await utilities.buildClassificationList();
+    let form = utilities.buildAddInventoryForm(formData, classificationList);
+
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav();
+        res.render("inventory/edit-inventory", {
+            errors: errors.array(),
+            form,
+            messages: req.flash("could not update inventory"),
+            title: "Edit Inventory Item",
+            nav,
+            inv_id,
+        });
+        return;
+    }
+    next();
+};
 
 module.exports = validate;
