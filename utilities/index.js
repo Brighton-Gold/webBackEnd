@@ -37,14 +37,14 @@ Util.buildClassificationGrid = async function (data) {
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => {
       grid += '<li style="list-style-type: none;">'
-      grid += '<a href="../../car/' + vehicle.inv_make + '" title="View '
+      grid += '<a href="../../car/' + vehicle.inv_id + '" title="View '
         + vehicle.inv_make + ' details"><img src="' + vehicle.inv_thumbnail
         + '" alt="Image of ' + vehicle.inv_make
         + ' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="../../car/' + vehicle.inv_make + '" title="View '
+      grid += '<a href="../../car/' + vehicle.inv_id + '" title="View '
         + vehicle.inv_make + ' details">'
         + vehicle.inv_make + '</a>'
       grid += '</h2>'
