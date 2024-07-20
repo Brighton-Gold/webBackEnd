@@ -33,51 +33,23 @@ Util.getNav = async function (req, res, next) {
  * ************************************ */
 Util.buildClassificationGrid = async function (data) {
   let grid = "";  // Initialize the grid variable
-
   if (data.length > 0) {
-    grid = '<ul id="inv-display">';
-    data.forEach((vehicle) => {
-      grid += '<li style="list-style-type: none;">';
-      grid +=
-        '<a href="/car/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' details"><img src="' +
-        vehicle.inv_thumbnail +
-        '" alt="Image of ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' on CSE Motors" /></a>';
-      grid += '<div class="namePrice">';
-      grid += "<hr />";
-      grid += "<h2>";
-      grid +=
-        '<a href="/car/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' details">' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        "</a>";
-      grid += "</h2>";
-      grid +=
-        "<span>$" +
-        new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
-        "</span>";
-      grid += "</div>";
-      grid += "</li>";
-    });
-    grid += "</ul>";
-  } else {
-    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';  // Initialize the grid variable when data is empty
+    grid = '<ul id="inv-display">'
+    data.forEach(vehicle => {
+      grid += '<li style="list-style-type: none;">'
+      grid += '<a href="../../car/' + vehicle.inv_make + '" title="View '
+        + vehicle.inv_make + ' details"><img src="' + vehicle.inv_thumbnail
+        + '" alt="Image of ' + vehicle.inv_make
+        + ' on CSE Motors" /></a>'
+      grid += '<div class="namePrice">'
+      grid += '<hr />'
+      grid += '<h2>'
+      grid += '<a href="../../car/' + vehicle.inv_make + '" title="View '
+        + vehicle.inv_make + ' details">'
+        + vehicle.inv_make + '</a>'
+      grid += '</h2>'
+    })
+    grid += '</ul>'
   }
   return grid;
 };
@@ -215,49 +187,40 @@ Util.buildAddInventoryForm = function (formData = {}, classificationList) {
   form += classificationList;
 
   form += '<label for="inv_make">Make</label>';
-  form += `<input type="text" id="inv_make" name="inv_make" value="${
-    formData.inv_make || ""
-  }" required>`;
+  form += `<input type="text" id="inv_make" name="inv_make" value="${formData.inv_make || ""
+    }" required>`;
 
   form += '<label for="inv_model">Model</label>';
-  form += `<input type="text" id="inv_model" name="inv_model" value="${
-    formData.inv_model || ""
-  }" required>`;
+  form += `<input type="text" id="inv_model" name="inv_model" value="${formData.inv_model || ""
+    }" required>`;
 
   form += '<label for="inv_description">Description</label>';
-  form += `<textarea id="inv_description" name="inv_description" required>${
-    formData.inv_description || ""
-  }</textarea>`;
+  form += `<textarea id="inv_description" name="inv_description" required>${formData.inv_description || ""
+    }</textarea>`;
 
   form += '<label for="inv_image">Image Path</label>';
-  form += `<input type="text" id="inv_image" name="inv_image" value="${
-    formData.inv_image || "/images/no-image.png"
-  }" required>`;
+  form += `<input type="text" id="inv_image" name="inv_image" value="${formData.inv_image || "/images/no-image.png"
+    }" required>`;
 
   form += '<label for="inv_thumbnail">Thumbnail Path</label>';
-  form += `<input type="text" id="inv_thumbnail" name="inv_thumbnail" value="${
-    formData.inv_thumbnail || "/images/no-image-thumbnail.png"
-  }" required>`;
+  form += `<input type="text" id="inv_thumbnail" name="inv_thumbnail" value="${formData.inv_thumbnail || "/images/no-image-thumbnail.png"
+    }" required>`;
 
   form += '<label for="inv_price">Price</label>';
-  form += `<input type="number" id="inv_price" name="inv_price" value="${
-    formData.inv_price || ""
-  }" required>`;
+  form += `<input type="number" id="inv_price" name="inv_price" value="${formData.inv_price || ""
+    }" required>`;
 
   form += '<label for="inv_year">Year</label>';
-  form += `<input type="number" id="inv_year" name="inv_year" value="${
-    formData.inv_year || ""
-  }" required>`;
+  form += `<input type="number" id="inv_year" name="inv_year" value="${formData.inv_year || ""
+    }" required>`;
 
   form += '<label for="inv_miles">Mileage</label>';
-  form += `<input type="number" id="inv_miles" name="inv_miles" value="${
-    formData.inv_miles || ""
-  }" required>`;
+  form += `<input type="number" id="inv_miles" name="inv_miles" value="${formData.inv_miles || ""
+    }" required>`;
 
   form += '<label for="inv_color">Color</label>';
-  form += `<input type="text" id="inv_color" name="inv_color" value="${
-    formData.inv_color || ""
-  }" required>`;
+  form += `<input type="text" id="inv_color" name="inv_color" value="${formData.inv_color || ""
+    }" required>`;
 
   form += '<button type="submit">Add Vehicle</button>';
   form += "</form>";
@@ -270,19 +233,18 @@ Util.buildAddInventoryForm = function (formData = {}, classificationList) {
 /* ****************************************
  *  Add New Classification Form
  * ************************************ */
-Util.buildAddClassificationForm = function (formData = {}) {  
+Util.buildAddClassificationForm = function (formData = {}) {
   let form = '<div class="classification-container">';
   form +=
     '<form action="/inv/add-classification" method="POST" id="addClassificationForm">';
   form += '<label for="classification_name">Classification Name</label>';
-  form += `<input type="text" id="classification_name" name="classification_name" value="${
-    formData.classification_name || ""
-  }" required>`;
+  form += `<input type="text" id="classification_name" name="classification_name" value="${formData.classification_name || ""
+    }" required>`;
   form += '<button type="submit">Add Classification</button>';
   form += "</form>";
   form += "</div>";
   return form;
-} 
+}
 
 
 module.exports = Util;
