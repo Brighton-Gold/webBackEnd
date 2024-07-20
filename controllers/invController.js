@@ -9,7 +9,9 @@ const invCont = {};
 invCont.buildByClassificationId = async function (req, res, next) {
   try {
     const classification_id = req.params.classificationId;
-    const data = await invModel.getInventoryByClassificationId(classification_id);
+    const data = await invModel.getInventoryByClassificationId(
+      classification_id
+    );
     const grid = await utilities.buildClassificationGrid(data);
     let nav = await utilities.getNav();
 
@@ -53,7 +55,7 @@ invCont.renderManagementView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
     let list = await utilities.buildManagementGrid();
-    const classificationSelect = await utilities.buildClassificationList()
+    const classificationSelect = await utilities.buildClassificationList();
     res.render("./inventory/inventoryManagement", {
       title: "Manage Inventory",
       nav,
@@ -130,8 +132,30 @@ invCont.addClassification = async function (req, res, next) {
  * ************************** */
 invCont.addInventory = async function (req, res, next) {
   try {
-    const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
-    const data = await invModel.addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
+    const {
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    } = req.body;
+    const data = await invModel.addInventory(
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    );
     if (data) {
       req.flash("info", "inventory added successfully");
     } else {
@@ -147,13 +171,32 @@ invCont.addInventory = async function (req, res, next) {
  *  Return Inventory by Classification As JSON
  * ************************** */
 invCont.getInventoryJSON = async (req, res, next) => {
-  const classification_id = parseInt(req.params.classification_id)
-  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  const classification_id = parseInt(req.params.classification_id);
+  const invData = await invModel.getInventoryByClassificationId(
+    classification_id
+  );
   if (invData[0].inv_id) {
-    return res.json(invData)
+    return res.json(invData);
   } else {
-    next(new Error("No data returned"))
+    next(new Error("No data returned"));
   }
-}
+};
+
+/* ***************************
+ *  Render Edit Inventory View
+ * ************************** */
+invCont.renderEditInventoryView = async (req, res, next) => {
+  const inv_id = parseInt(req.params.inv_id);
+  const invData = await invModel.getInventoryById(inv_id);
+  const classificationList = await utilities.buildClassificationList();
+  const form = utilities.buildEditInventoryForm(invData, classificationList);
+  res.render("./inventory/edit-inventory", {
+    title: "Edit Inventory",
+    nav: await utilities.getNav(),
+    form,
+    messages: req.flash("info"),
+    errors: req.flash("errors"),
+  });
+};
 
 module.exports = invCont;

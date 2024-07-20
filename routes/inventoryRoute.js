@@ -15,7 +15,7 @@ router.get("/management", invController.renderManagementView)
 router.get("/add-inventory", invController.renderAddInventoryView)
 router.get("/add-classification", invController.renderNewClassificationView)
 router.get("/getInventory/:classification_id", invController.getInventoryJSON)
-
+router.get("/edit/:inv_id", invController.renderEditInventoryView)
 
 router.post(
     "/add-classification",
