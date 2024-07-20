@@ -166,15 +166,15 @@ validate.updateInventoryRules = () => {
             .matches(/^[a-zA-Z\s]*$/).withMessage('Color can only contain letters and spaces')
             .notEmpty().withMessage('Color is required'),
 
-        // body('inv_image')
-        //     .trim()
-        //     .isURL().withMessage('Image must be a valid URL')
-        //     .optional({ checkFalsy: true }), // Optional, but if present must be a valid URL
+        body('inv_image')
+            .trim()
+            .isURL().withMessage('Image must be a valid URL')
+            .optional({ checkFalsy: true }), // Optional, but if present must be a valid UR
 
-        // body('inv_thumbnail')
-        //     .trim()
-        //     .isURL().withMessage('Thumbnail must be a valid URL')
-        //     .optional({ checkFalsy: true }) // Optional, but if present must be a valid URL
+         body('inv_thumbnail')
+             .trim()
+             .isURL().withMessage('Thumbnail must be a valid URL')
+             .optional({ checkFalsy: true }) // Optional, but if present must be a valid URL
     ];
 }
 

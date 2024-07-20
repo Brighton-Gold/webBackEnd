@@ -285,29 +285,31 @@ invCont.updateInventory = async (req, res, next) => {
     inv_id,
     inv_make,
     inv_model,
-    inv_year,
     inv_description,
     inv_image,
     inv_thumbnail,
     inv_price,
+    inv_year,
     inv_miles,
     inv_color,
     classification_id
   } = req.body;
+  console.log(req.body)
   const data = await invModel.updateInventory(
     inv_id,
     inv_make,
     inv_model,
-    inv_year,
     inv_description,
     inv_image,
     inv_thumbnail,
     inv_price,
+    inv_year,
     inv_miles,
     inv_color,
     classification_id
   );
   if (data) {
+  
     req.flash("info", "Inventory updated successfully");
   } else {
     req.flash("errors", "Failed to update inventory");
