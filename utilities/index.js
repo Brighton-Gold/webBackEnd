@@ -82,19 +82,6 @@ Util.buildCarDetail = function (car) {
   return detail;
 };
 
-/* **************************************
- * Build the management view HTML
- * ************************************ */
-Util.buildManagementGrid = async function (req, res, next) {
-  let list = "<div class = 'management'><ul>";
-  list += "<p><a href=/inv/add-classification>Add New Classification</a></p>";
-  list += "<p><a href=/inv/add-inventory>Add New Inventory</a></p>";
-  list += "</ul></div>";
-  list += "<h2>Current Inventory</h2>";
-  list += "<table id=inventoryDisplay></table>";
-  list += "<noscript>JavaScript must be enabled to use this page.</noscript>";
-  return list;
-};
 
 /* ****************************************
  * Middleware to check token validity
