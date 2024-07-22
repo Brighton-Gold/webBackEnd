@@ -110,6 +110,8 @@ Util.checkJWTToken = (req, res, next) => {
   }
 };
 
+
+
 /* ****************************************
  * Middleware to check classification name validity
  **************************************** */
@@ -138,6 +140,13 @@ Util.checkLogin = (req, res, next) => {
     req.flash("notice", "Please log in.");
     return res.redirect("/account/login");
   }
+};
+
+/* ****************************************
+ *  Check account level
+ * ************************************ */
+Util.checkAccountLevel = (req, res, next) => {
+
 };
 
 /* ****************************************

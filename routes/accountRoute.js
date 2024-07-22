@@ -11,6 +11,13 @@ router.get("/login", accountController.buildLogin);
 // Route to build the registration view
 router.get("/register", accountController.buildRegister);
 
+// Route to check if logged in
+router.get("/", 
+  utilities.checkLogin, 
+  utilities.checkAccountLevel,
+  accountController.buildAccountManagement
+);
+
 
 // Route to handle registration
 router.post(
@@ -28,8 +35,6 @@ router.post(
   home.buildHome
 );
 
-// Route to check if logged in
-router.get("/", utilities.checkLogin, accountController.buildAccountManagement);
 
 // Route to handle logout
 router.get('/logout', accountController.accountLogout);
