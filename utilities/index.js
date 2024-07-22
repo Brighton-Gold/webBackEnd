@@ -130,12 +130,14 @@ Util.validateClassification = async (req, res, next) => {
   }
 };
 
+
 /* ****************************************
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
-    next();
+    console.log("Logged in");
+    res.redirect("/");
   } else {
     req.flash("notice", "Please log in.");
     return res.redirect("/account/login");
@@ -145,7 +147,9 @@ Util.checkLogin = (req, res, next) => {
 /* ****************************************
  *  Check account level
  * ************************************ */
-Util.checkAccountLevel = (req, res, next) => {
+Util.checkAccountLevel = async (req, res, next) => {
+  let accountData = await invModel.getAccountData(res.locals.accountData.account_id);
+  console.log("account data = ", accountData);
 
 };
 
