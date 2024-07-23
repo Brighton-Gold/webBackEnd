@@ -32,7 +32,7 @@ router.post(
   "/login",
   regValidate.loginRules(), 
   regValidate.checkLoginData,
-  home.buildHome
+  accountController.accountLogin
 );
 
 

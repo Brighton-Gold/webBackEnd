@@ -36,7 +36,6 @@ async function buildAccountManagement(req, res, next) {
   res.render("account/accountManagement", {
     title: "Account Management",
     nav,
-    form,
     errors: null
   })
 }
