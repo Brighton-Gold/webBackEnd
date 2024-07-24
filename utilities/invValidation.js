@@ -128,6 +128,28 @@ validate.checkUpdateInvData = async (req, res, next) => {
     next();
 };
 
+/* ******************************
+* Check updated classification data and return errors or adds
+* ***************************** */
+validate.checkUpdateClassData = async (req, res, next) => {
+    let errors = validationResult(req);
+    let formData = req.body;
+    let classification_id = req.body.classification_id;
+    let form = utilities.buildAddClassificationForm(formData);
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav();
+        res.render("inventory/edit-classification", {
+            errors: errors.array(),
+            form,
+            messages: req.flash("could not update classification"),
+            title: "Edit Classification",
+            nav,
+            inv_id,
+        });
+        return;
+    }
+    next();
+};
 
 validate.updateInventoryRules = () => {
     return [

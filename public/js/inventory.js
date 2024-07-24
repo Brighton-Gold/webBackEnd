@@ -1,5 +1,4 @@
 'use strict';
-
 // Get a list of items in inventory based on the classification_id
 let classificationList = document.querySelector("#classificationList");
 if (classificationList) {
@@ -54,4 +53,60 @@ function buildInventoryList(data) {
 
   // Display the contents in the Inventory Management view
   inventoryDisplay.innerHTML = dataTable;
+}
+
+
+//get the list of classifications to update or delete
+let classificationListEdit = document.querySelector("#classificationListEdit");
+if (classificationListEdit) {
+  classificationListEdit.addEventListener("change", function () {
+    let classification_id = classificationListEdit.value;
+    console.log(`classification_id is: ${classification_id}`);
+    let classIdURL = `/inv/getInventory/${classification_id}`;
+    fetch(classIdURL)
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not OK");
+      })
+      .then(function (data) {
+        console.log(data);
+        buildInventoryList(data);
+      })
+      .catch(function (error) {
+        console.error('There was a problem:', error.message);
+      });
+  });
+}
+
+function buildClassificationList(data) {
+  let classificationDisplay = document.getElementById("classificationDisplay");
+  if (!classificationDisplay) {
+    console.error("Classification display element not found");
+    return;
+  }
+
+  // Set up the table labels
+  let dataTable = `
+    <thead>
+      <tr><th>Classification Name</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+    </thead>
+    <tbody>`;
+
+  // Iterate over all vehicles in the array and put each in a row
+  data.forEach(function (element) {
+    console.log(`${element.classification_id}, ${element.classification_name}`);
+    dataTable += `
+      <tr>
+        <td>${element.classification_name}</td>
+        <td><a href='/inv/edit-classification/${element.classification_id}' title='Click to update'>Modify</a></td>
+        <td><a href='/inv/delete-classification/${element.classification_id}' title='Click to delete'>Delete</a></td>
+      </tr>`;
+  });
+
+  dataTable += '</tbody>';
+
+  // Display the contents in the Inventory Management view
+  classificationDisplay.innerHTML = dataTable;
 }

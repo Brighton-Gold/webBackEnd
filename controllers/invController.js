@@ -44,6 +44,20 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 };
 
+/**************************
+ * Edit Classification
+ *************************/
+invCont.editClassification = async (req, res, next) => {
+  const { classification_id, classification_name } = req.body;
+  const data = await invModel.updateClassification(classification_id, classification_name);
+  if (data) {
+    req.flash("info", "Classification updated successfully");
+  } else {
+    req.flash("errors", "Failed to update classification");
+  }
+  res.redirect("/inv/management");
+};
+
 /* ***************************
  *  Build individual car details view
  * ************************** */
@@ -74,9 +88,11 @@ invCont.renderManagementView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
     const classificationSelect = await utilities.buildClassificationList();
+    const classificationDisplay = await utilities.buildClassificationList();
     res.render("./inventory/inventoryManagement", {
       title: "Manage Inventory",
       nav,
+      classificationDisplay,
       classificationSelect,
       errors: null,
     });

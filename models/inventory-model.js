@@ -157,6 +157,22 @@ async function updateInventory(
     console.error("model error: " + error);
   }
 }
+/**********************
+ * Update Classification
+ ***********************/
+async function updateClassification(classification_id, classification_name) {
+  try {
+    const data = await pool.query(
+      "UPDATE public.classification SET classification_name = $1 WHERE classification_id = $2 RETURNING *",
+      [classification_name, classification_id]
+    );
+    return data.rows[0];
+  } catch (error) {
+    console.error("Error updating classification: " + error);
+    throw error;
+  }
+}
+
 
 /* ***************************
  *  Delete Inventory Data
@@ -183,5 +199,7 @@ module.exports = {
   checkExistingClassification,
   addInventory,
   updateInventory,
-  deleteInventory
+  deleteInventory,
+  updateClassification
+
 };

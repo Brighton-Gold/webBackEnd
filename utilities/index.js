@@ -176,6 +176,20 @@ Util.buildClassificationList = async function (classification_id = null) {
 };
 
 /* ****************************************
+ *  Check Classifications
+ * ************************************ */
+Util.buildOnlyClassificationList = async function () {
+  let data = await invModel.getClassifications();
+  let classificationList = data.rows.map((row) => {
+    return {
+      classification_id: row.classification_id,
+      classification_name: row.classification_name,
+    };
+  });
+  return classificationList;
+};
+
+/* ****************************************
  *  Add inventory Form
  * ************************************ */
 Util.buildAddInventoryForm = function (formData = {}, classificationList) {
