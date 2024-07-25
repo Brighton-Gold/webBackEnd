@@ -9,6 +9,21 @@ async function getClassifications() {
   );
 }
 
+/**************************
+ * Get one classification
+ *************************/
+async function getClassificationById(classification_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.classification WHERE classification_id = $1`,
+      [classification_id]
+    );
+    return data.rows[0];
+  } catch (error) {
+    console.error("getClassificationById error " + error);
+  }
+}
+
 /* ***************************
  *  Add new classification data
  * ************************** */
@@ -200,6 +215,7 @@ module.exports = {
   addInventory,
   updateInventory,
   deleteInventory,
-  updateClassification
+  updateClassification, 
+  getClassificationById
 
 };

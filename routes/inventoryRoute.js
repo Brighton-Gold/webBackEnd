@@ -18,6 +18,7 @@ router.get("/getInventory/:classification_id", invController.getInventoryJSON);
 
 router.get("/edit-inventory/:inv_id", invController.editInventoryView)
 router.get("/delete-inventory/:inv_id", invController.deleteInventory)
+router.get("/edit-classification/:classification_id", invController.editClassificationView)
 
 router.post(
     "/add-classification",
@@ -39,6 +40,7 @@ router.post(
     "/edit-inventory",
     classValidate.inventoryRules(),
     classValidate.checkUpdateInvData, 
+    invController.updateInventory
     invController.updateInventory,
     invController.renderInvManagementView
 
@@ -48,6 +50,7 @@ router.post(
     "/edit-classification",
     classValidate.classificationRules(),
     classValidate.checkUpdateClassData,
+    invController.updateClassification
     invController.editClassification,
     invController.renderInvManagementView
 )
