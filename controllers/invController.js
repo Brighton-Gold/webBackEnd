@@ -6,7 +6,7 @@ const invCont = {};
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
-invCont.buildByClassificationId = async function (req, res, next) {
+invCont.buildInvByClassId = async function (req, res, next) {
   try {
     const classification_id = req.params.classificationId;
     const classification_name = req.params.classificationName;
@@ -84,7 +84,7 @@ invCont.buildCarById = async function (req, res, next) {
 /* ***************************
  *  Render Inventory Management View
  * ************************** */
-invCont.renderManagementView = async function (req, res, next) {
+invCont.renderInvManagementView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
     const classificationSelect = await utilities.buildClassificationList();
@@ -126,7 +126,7 @@ invCont.renderAddInventoryView = async function (req, res, next) {
 /* ***************************
  *  Render Add New Classification View
  * ************************** */
-invCont.renderNewClassificationView = async function (req, res, next) {
+invCont.renderAddNewClassView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
     let form = utilities.buildAddClassificationForm();

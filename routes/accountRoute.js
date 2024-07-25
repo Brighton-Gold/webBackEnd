@@ -6,16 +6,16 @@ const home = require("../controllers/baseController");
 const regValidate = require('../utilities/account-validation');
 
 // Route to build the login view
-router.get("/login", accountController.buildLogin);
+router.get("/login", accountController.buildLoginView);
 
 // Route to build the registration view
-router.get("/register", accountController.buildRegister);
+router.get("/register", accountController.buildRegistrationView);
 
 // Route to check if logged in
 router.get("/", 
   utilities.checkLogin, 
   utilities.checkAccountLevel,
-  accountController.buildAccountManagement
+  accountController.buildAccountManagementView
 );
 
 

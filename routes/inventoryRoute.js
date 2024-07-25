@@ -5,15 +5,15 @@ const utilities = require('../utilities');
 const classValidate = require('../utilities/invValidation.js');
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId/:classificationName", invController.buildByClassificationId);
+router.get("/type/:classificationId/:classificationName", invController.buildInvByClassId);
 
 // Route to build individual car details view
 router.get("/car/:inv_id", invController.buildCarById);
 
-router.get("/management", invController.renderManagementView)
+router.get("/management", invController.renderInvManagementView)
 
 router.get("/add-inventory", invController.renderAddInventoryView)
-router.get("/add-classification", invController.renderNewClassificationView)
+router.get("/add-classification", invController.renderAddNewClassView)
 router.get("/getInventory/:classification_id", invController.getInventoryJSON);
 
 router.get("/edit-inventory/:inv_id", invController.editInventoryView)
@@ -24,7 +24,7 @@ router.post(
     classValidate.classificationRules(),
     classValidate.checkClassData,
     invController.addClassification,
-    invController.renderNewClassificationView
+    invController.renderAddNewClassView
 )
 
 router.post(
@@ -40,7 +40,7 @@ router.post(
     classValidate.inventoryRules(),
     classValidate.checkUpdateInvData, 
     invController.updateInventory,
-    invController.renderManagementView
+    invController.renderInvManagementView
 
 )
 
@@ -49,13 +49,13 @@ router.post(
     classValidate.classificationRules(),
     classValidate.checkUpdateClassData,
     invController.editClassification,
-    invController.renderManagementView
+    invController.renderInvManagementView
 )
 
 router.post(
     "/delete-inventory", 
     invController.deleteInventory,
-    invController.renderManagementView
+    invController.renderInvManagementView
 )
 
 module.exports = router;

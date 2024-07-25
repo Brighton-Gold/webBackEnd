@@ -58,7 +58,7 @@ app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
 
 app.use(static)
-app.get("/", baseController.buildHome)
+app.get("/", baseController.buildHomeView)
 
 
 app.use("/account", require("./routes/accountRoute"))
