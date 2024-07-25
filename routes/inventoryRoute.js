@@ -25,7 +25,6 @@ router.post(
     classValidate.classificationRules(),
     classValidate.checkClassData,
     invController.addClassification,
-    invController.renderAddNewClassView
 )
 
 router.post(
@@ -33,7 +32,6 @@ router.post(
     classValidate.inventoryRules(),
     classValidate.checkInvData,
     invController.addInventory,
-    invController.renderAddInventoryView
 )
 
 router.post(
@@ -41,18 +39,13 @@ router.post(
     classValidate.inventoryRules(),
     classValidate.checkUpdateInvData, 
     invController.updateInventory
-    invController.updateInventory,
-    invController.renderInvManagementView
-
 )
 
 router.post(
     "/edit-classification",
     classValidate.classificationRules(),
     classValidate.checkUpdateClassData,
-    invController.updateClassification
-    invController.editClassification,
-    invController.renderInvManagementView
+    invController.editClassification
 )
 
 router.post(
