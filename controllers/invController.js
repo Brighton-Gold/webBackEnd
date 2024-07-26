@@ -324,6 +324,53 @@ invCont.addClassification = async function (req, res, next) {
 };
 
 
+/* ***************************
+ *  Edit Classification View
+ * ************************** */
+invCont.editClassificationView = async function (req, res, next) {
+  try {
+    const classification_id = req.params.classification_id;
+    const data = await invModel.getClassificationById(classification_id);
+    let nav = await utilities.getNav();
+    res.render("./inventory/edit-classification", {
+      title: "Edit Classification",
+      nav,
+      messages: req.flash("info"),
+      classification_id: data.classification_id,
+      classification_name: data.classification_name,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+/***********************
+ * Update Classification
+ **********************/
+invCont.updateClassification = async function (req, res, next) {
+  const { classification_id, classification_name } = req.body;
+  const data = await invModel.updateClassification(classification_id, classification_name);
+  if (data) {
+    req.flash("info", "Classification updated successfully");
+  } else {
+    req.flash("errors", "Failed to update classification");
+  }
+  res.redirect("/inv/management");
+}
+
+/***********************
+ * Delete Classification
+ **********************/
+invCont.deleteClassification = async function (req, res, next) {
+  const { classification_id, classification_name } = req.body;
+  const data = await invModel.deleteClassification(classification_id, classification_name);
+  if (data) {
+    req.flash("info", "Classification delete successfully");
+  } else {
+    req.flash("errors", "Failed to delete classification");
+  }
+  res.redirect("/inv/management");
+}
 
 /* ***************************
  *  Build individual car details view
@@ -349,23 +396,21 @@ invCont.buildCarById = async function (req, res, next) {
 };
 
 /* ***************************
- *  Edit Classification View
- * ************************** */
-invCont.editClassificationView = async function (req, res, next) {
+  *  Delete Classification
+  * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
   try {
-    const classification_id = req.params.classification_id;
-    const data = await invModel.getClassificationById(classification_id);
-    let nav = await utilities.getNav();
-    res.render("./inventory/edit-classification", {
-      title: "Edit Classification",
-      nav,
-      classification_id: data.classification_id,
-      classification_name: data.classification_name,
-    });
+    const classification_id = req.params.inv_id;
+    const data = await invModel.deleteClassification(classification_id);
+    if (data) {
+      req.flash("info", "Inventory deleted successfully");
+    } else {
+      req.flash("errors", "Failed to delete inventory");
+    }
+    res.redirect("/inv/management");
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 module.exports = invCont;

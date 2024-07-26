@@ -123,6 +123,23 @@ async function getCarById(inv_id) {
 }
 
 /* ***************************
+ *  Update Classification Data
+ * ************************** */
+async function updateClassification(classification_id, classification_name) {
+  try {
+    const data = await pool.query(
+      "UPDATE public.classification SET classification_name = $1 WHERE classification_id = $2 RETURNING *",
+      [classification_name, classification_id]
+    );
+
+    return data.rows[0];
+  } catch (error) {
+    console.error("Error updating classification: " + error);
+    throw error;
+  }
+}
+
+/* ***************************
  *  Update Inventory Data
  * ************************** */
 async function updateInventory(
@@ -178,14 +195,34 @@ async function deleteInventory(inv_id) {
   }
 }
 
+/* ***************************
+ *  Delete Classification Data
+ * ************************** */
+async function deleteClassification(classification_id) {
+  try {
+    const data = await pool.query(
+      "DELETE FROM public.inventory WHERE classification_id = $1 RETURNING *",
+      [classification_id]
+    );
+
+    return data.rows[0];
+  } catch (error) {
+    console.error("Error deleting inventory item: " + error);
+    throw error;
+  }
+}
+
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
   getCarById,
   addClassification,
   addInventory,
+  updateClassification,
   updateInventory,
   deleteInventory,
+  deleteClassification,
   getClassificationById
 
 };

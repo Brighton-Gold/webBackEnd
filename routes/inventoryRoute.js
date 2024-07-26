@@ -41,11 +41,22 @@ router.post(
     invController.updateInventory
 )
 
-
-
 router.post(
     "/delete-inventory", 
     invController.deleteInventory,
+    invController.renderInvManagementView
+)
+
+router.post(
+    "/edit-classification",
+    classValidate.classificationRules(),
+    classValidate.checkUpdateClassData,
+    invController.updateClassification
+)
+
+router.post(
+    "/delete-classification",
+    invController.deleteClassification,
     invController.renderInvManagementView
 )
 
