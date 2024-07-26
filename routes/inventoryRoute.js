@@ -42,6 +42,14 @@ router.post(
 )
 
 router.post(
+    "/edit-classification",
+    classValidate.classificationRules(),
+    classValidate.checkUpdateClassData,
+    invController.editClassification
+)
+
+
+router.post(
     "/delete-inventory", 
     invController.deleteInventory,
     invController.renderInvManagementView
