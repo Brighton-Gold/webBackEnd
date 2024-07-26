@@ -9,6 +9,7 @@ async function getClassifications() {
   );
 }
 
+
 /**************************
  * Get one classification
  *************************/
@@ -88,19 +89,6 @@ async function addInventory(
   }
 }
 
-/* **********************
- *   Check for existing classification name
- * ********************* */
-async function checkExistingClassification(classification_name) {
-  try {
-    const sql =
-      "SELECT * FROM public.classification WHERE classification_name = $1";
-    const classification = await pool.query(sql, [classification_name]);
-    return classification.rowCount;
-  } catch (error) {
-    return error.message;
-  }
-}
 
 /* ***************************
  *  Get inventory by classification ID
@@ -172,22 +160,6 @@ async function updateInventory(
     console.error("model error: " + error);
   }
 }
-/**********************
- * Update Classification
- ***********************/
-async function updateClassification(classification_id, classification_name) {
-  try {
-    const data = await pool.query(
-      "UPDATE public.classification SET classification_name = $1 WHERE classification_id = $2 RETURNING *",
-      [classification_name, classification_id]
-    );
-    return data.rows[0];
-  } catch (error) {
-    console.error("Error updating classification: " + error);
-    throw error;
-  }
-}
-
 
 /* ***************************
  *  Delete Inventory Data
@@ -211,11 +183,9 @@ module.exports = {
   getInventoryByClassificationId,
   getCarById,
   addClassification,
-  checkExistingClassification,
   addInventory,
   updateInventory,
   deleteInventory,
-  updateClassification, 
   getClassificationById
 
 };

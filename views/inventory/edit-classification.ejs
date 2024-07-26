@@ -1,24 +1,25 @@
 <div class="inventory-container">
-    <% if (title) { %>
-      <h1><%= title %></h1>
-    <% } %>
-  
-    <% if (messages.length > 0) { %>
-      <div class="messages">
-          <p><%= messages %></p>
-      </div>
-    <% } %>
-  
-    <% if (errors.length > 0) { %>
-      <div class="errors">
-        <% errors.forEach(function(error) { %>
-          <p><%= error %></p>
-        <% }) %>
-      </div>
-    <% } %>
-  
-    <%- form %>
-  </div>
-
-
-  
+        <% if (title) { %>
+            <h1><%= title %></h1>
+        <% } %>
+    
+        <% if (messages.length > 0) { %>
+            <div class="messages">
+                <p><%= messages %></p>
+            </div>
+        <% } %>  
+    
+        <form action="/inv/update-classification" method="POST" id="updateClassificationForm">
+            <input type="hidden" id="classification_id" name="classification_id" value="<%= classification_id %>">
+            
+            <label for="classification_name">Classification Name</label>
+            <input type="text" id="classification_name" name="classification_name" value="<%= classification_name %>" required>
+            
+            <button type="submit">Save Classification</button>
+        </form>
+        
+        <form action="/inv/delete-classification" method="POST" id="deleteClassificationForm">
+            <input type="hidden" id="classification_id" name="classification_id" value="<%= classification_id %>">
+            <button type="submit" class="delete-btn">Delete Classification</button>
+        </form>
+    </div>

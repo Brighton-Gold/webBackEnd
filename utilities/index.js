@@ -1,3 +1,4 @@
+const e = require("express");
 const invModel = require("../models/inventory-model");
 const Util = {};
 const jwt = require("jsonwebtoken");
@@ -124,19 +125,19 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList;
 };
 
-/* Build Only Classification List */
-Util.buildOnlyClassificationList = async function () {
+/* Build classification list for management view */
+Util.buildClassificationListForManagement = async function (formData = {}) {  
   let data = await invModel.getClassifications();
   let form = '<div class="classification-container">';
-  form += '<form action="/inv/edit-classification" method="POST">';
-  for (let i = 0; i < data.rows.length; i++) {
-    let classification = data.rows[i];  
-    form += "<a href='/inv/edit-classification/" + classification.classification_id + "'>" + classification.classification_name + "</a>";
-    console.log(classification);
-  }
+  form += '<form action="/inv/edit-classification" method="POST" id="editClassificationForm">';
+  data.rows.forEach((row) => {
+    form += "<a href='/inv/edit-classification/" + row.classification_id + "'>" + row.classification_name + "</a>";
+  });
   form += "</form></div>";
   return form;
+
 };
+
 
 /* Build the Add Classification Form */
 Util.buildAddClassificationForm = function (formData = {}) {
@@ -149,21 +150,6 @@ Util.buildAddClassificationForm = function (formData = {}) {
   return form;
 };
 
-/* Build the Update Classification Form */
-Util.buildEditClassificationForm = function (formData = {}) {
-  let form = '<div class="classification-container">';
-  form += '<form action="/inv/update-classification" method="POST" id="updateClassificationForm">';
-  form += `<input type="hidden" id="classification_id" name="classification_id" value="${formData.classification_id || ""}">`;
-  form += '<label for="classification_name">Classification Name</label>';
-  form += `<input type="text" id="classification_name" name="classification_name" value="${formData.classification_name || ""}" required>`;
-  form += '<button type="submit">Save Classification</button>';
-  form += '</form>';
-  form += '<form action="/inv/delete-classification" method="POST" id="deleteClassificationForm">';
-  form += `<input type="hidden" id="classification_id" name="classification_id" value="${formData.classification_id || ""}">`;
-  form += '<button type="submit">Delete Classification</button>';
-  form += "</form></div>";
-  return form;
-};
 
 /* **************************************
  * Middleware Functions
