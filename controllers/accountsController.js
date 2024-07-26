@@ -7,7 +7,7 @@ require("dotenv").config()
 /* ****************************************
 *  Deliver login view
 * *************************************** */
-async function buildLogin(req, res, next) {
+async function buildLoginView(req, res, next) {
   let nav = await utilities.getNav()
   res.render("account/login", {
     title: "Login",
@@ -19,7 +19,7 @@ async function buildLogin(req, res, next) {
 /* ****************************************
 *  Deliver registration view
 * *************************************** */
-async function buildRegister(req, res, next) {
+async function buildRegistrationView(req, res, next) {
   let nav = await utilities.getNav()
   res.render("account/register", {
     title: "Register",
@@ -31,7 +31,7 @@ async function buildRegister(req, res, next) {
 /***************
  * Build Management
 ************** */
-async function buildAccountManagement(req, res, next) {
+async function buildAccountManagementView(req, res, next) {
   let nav = await utilities.getNav()
   res.render("account/accountManagement", {
     title: "Account Management",
@@ -123,7 +123,8 @@ async function accountLogin(req, res) {
 
 /* ****************************************
  * Logout Process
- * ************************************ */async function accountLogout(req, res) {
+ * ************************************ */
+async function accountLogout(req, res) {
   res.clearCookie('jwt');
   req.flash('notice', 'You have been logged out.');
   res.redirect('/account/login');
@@ -131,4 +132,4 @@ async function accountLogin(req, res) {
 
 
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, accountLogout, buildAccountManagement }  
+module.exports = { buildLoginView, buildRegistrationView, registerAccount, accountLogin, accountLogout, buildAccountManagementView }  
