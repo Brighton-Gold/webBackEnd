@@ -289,7 +289,7 @@ invCont.updateInventory = async (req, res, next) => {
 /* ***************************
  *  Render Add New Classification View
  * ************************** */
-invCont.renderNewClassificationView = async function (req, res, next) {
+invCont.renderAddNewClassView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
     let form = utilities.buildAddClassificationForm();

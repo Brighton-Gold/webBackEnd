@@ -41,12 +41,6 @@ router.post(
     invController.updateInventory
 )
 
-router.post(
-    "/edit-classification",
-    classValidate.classificationRules(),
-    classValidate.checkUpdateClassData,
-    invController.editClassification
-)
 
 
 router.post(
