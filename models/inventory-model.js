@@ -196,13 +196,32 @@ async function deleteInventory(inv_id) {
 }
 
 /* ***************************
- *  Delete Classification Data
- * ************************** */
-async function deleteClassification(classification_id) {
+  *  Delete Inventory by Classification Data Didn't work
+  * ************************** */
+async function deleteInventoryByClassification(classification_id) {
   try {
     const data = await pool.query(
       "DELETE FROM public.inventory WHERE classification_id = $1 RETURNING *",
       [classification_id]
+    );
+
+    return data.rows[0];
+  } catch (error) {
+    console.error("Error deleting inventory item: " + error);
+    throw error;
+  }
+}
+
+
+/* ***************************
+ *  Delete Classification Data
+ * ************************** */
+async function deleteClassification(classification_id) {
+  try {
+    deleteInventoryByClassification(classification_id);
+    const data = await pool.query(
+      "DELETE FROM public.classification WHERE classification_id = $1 AND DELETE FROM public.classification WHERE classification_id = $1 RETURNING *",
+      [classification_id],
     );
 
     return data.rows[0];
@@ -223,6 +242,7 @@ module.exports = {
   updateInventory,
   deleteInventory,
   deleteClassification,
-  getClassificationById
+  getClassificationById,
+  deleteInventoryByClassification
 
 };

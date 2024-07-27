@@ -44,7 +44,6 @@ router.post(
 router.post(
     "/delete-inventory", 
     invController.deleteInventory,
-    invController.renderInvManagementView
 )
 
 router.post(
@@ -57,7 +56,6 @@ router.post(
 router.post(
     "/delete-classification",
     invController.deleteClassification,
-    invController.renderInvManagementView
 )
 
 module.exports = router;
