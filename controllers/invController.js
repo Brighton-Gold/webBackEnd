@@ -348,15 +348,21 @@ invCont.editClassificationView = async function (req, res, next) {
  * Update Classification
  **********************/
 invCont.updateClassification = async function (req, res, next) {
-  const { classification_id, classification_name } = req.body;
-  const data = await invModel.updateClassification(classification_id, classification_name);
-  if (data) {
-    req.flash("info", "Classification updated successfully");
-  } else {
-    req.flash("errors", "Failed to update classification");
+  try {
+    const classification_id = req.body.classification_id;
+    const classification_name = req.body.classification_name;
+    const data = await invModel.updateClassification(classification_id, classification_name);
+    if (data) {
+      req.flash("messages", "Classification updated successfully");
+    } else {
+      req.flash("messages", "Failed to update classification");
+    }
+    res.redirect("/inv/management");
+  } catch (error) {
+    req.flash("messages", "An error occurred while updating classification");
+    res.redirect("/inv/management");
   }
-  res.redirect("/inv/management");
-}
+};
 
 /***********************
  * Delete Classification

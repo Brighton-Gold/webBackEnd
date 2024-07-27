@@ -81,6 +81,25 @@ validate.checkClassData = async (req, res, next) => {
 }
 
 /* ******************************
+* Check classification data and return errors or adds
+* ***************************** */
+validate.checkUpdateClassData = async (req, res, next) => {
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("inventory/management", {
+            errors,
+            messages: "Could not add new Classification",
+            title: "Add New Classification",
+            nav,
+        })
+        return
+    }
+    next()
+}
+
+/* ******************************
 * Check inventory data and return errors or adds
 * ***************************** */
 validate.checkInvData = async (req, res, next) => {
@@ -133,18 +152,17 @@ validate.checkUpdateInvData = async (req, res, next) => {
 * ***************************** */
 validate.checkUpdateClassData = async (req, res, next) => {
     let errors = validationResult(req);
-    let formData = req.body;
     let classification_id = req.body.classification_id;
-    let form = utilities.buildAddClassificationForm(formData);
+    let classification_name = req.body.classification_name;
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();
         res.render("inventory/edit-classification", {
             errors: errors.array(),
-            form,
-            messages: req.flash("could not update classification"),
+            messages: req.flash("errors", "Could not update classification"),
             title: "Edit Classification",
             nav,
-            inv_id,
+            classification_id,
+            classification_name,
         });
         return;
     }

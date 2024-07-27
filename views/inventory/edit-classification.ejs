@@ -1,15 +1,5 @@
 <div class="inventory-container">
-        <% if (title) { %>
-            <h1><%= title %></h1>
-        <% } %>
-    
-        <% if (messages.length > 0) { %>
-            <div class="messages">
-                <p><%= messages %></p>
-            </div>
-        <% } %>  
-    
-        <form action="/inv/update-classification" method="POST" id="updateClassificationForm">
+        <form action="/inv/edit-classification" method="POST" id="updateClassificationForm">
             <input type="hidden" id="classification_id" name="classification_id" value="<%= classification_id %>">
             
             <label for="classification_name">Classification Name</label>
