@@ -196,7 +196,7 @@ async function deleteInventory(inv_id) {
 }
 
 /* ***************************
-  *  Delete Inventory by Classification Data Didn't work
+  *  Delete Inventory by Classification Data
   * ************************** */
 async function deleteInventoryByClassification(classification_id) {
   try {
@@ -220,7 +220,7 @@ async function deleteClassification(classification_id) {
   try {
     deleteInventoryByClassification(classification_id);
     const data = await pool.query(
-      "DELETE FROM public.classification WHERE classification_id = $1 AND DELETE FROM public.classification WHERE classification_id = $1 RETURNING *",
+      "DELETE from public.classification WHERE classification_id = $1 RETURNING *",
       [classification_id],
     );
 
